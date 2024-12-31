@@ -1,12 +1,11 @@
-.home{
-    background-color: rgb(235, 235, 235);
-   /*  height: 100vh; */
+.home {
+  background-color: rgb(235, 235, 235);
+  /*  height: 100vh; */
 }
 
-.ComponentContainer{
-    display: flex;  
-    width: 80%;
-    margin: auto;
-    justify-content: space-between;
+.ComponentContainer {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
 }
-    

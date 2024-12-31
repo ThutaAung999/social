@@ -1,8 +1,8 @@
-import React from "react";
-import "./contentpost.css";
+import React from 'react';
+import './contentpost.css';
 
 const ContentPost = () => {
-  return <div></div>;
+  return <div>Content Post</div>;
 };
 
 export default ContentPost;
