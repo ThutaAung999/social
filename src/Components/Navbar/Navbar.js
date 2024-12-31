@@ -1,9 +1,9 @@
-import React from "react";
-import "./navbar.css";
-import SearhIcon from "../Images/search.png";
-import Notifications from "../Images/bell.png";
-import Message from "../Images/message.png";
-import ProfileImage from "../Images/Profile.png";
+import React from 'react';
+import './navbar.css';
+import SearhIcon from '../Images/search.png';
+import Notifications from '../Images/bell.png';
+import Message from '../Images/message.png';
+import ProfileImage from '../Images/Profile.png';
 
 const Navbar = () => {
   return (
@@ -26,9 +26,9 @@ const Navbar = () => {
       <div className="IconsContainer">
         <img src={`${Notifications}`} className="Icons" alt="" />
         <img src={`${Message}`} className="Icons" alt="" />
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src={`${ProfileImage}`} className="ProfileImage" alt="" />
-          <p style={{ marginLeft: "5px" }}>Thuta</p>
+          <p style={{ marginLeft: '5px' }}>Thuta</p>
         </div>
       </div>
     </div>

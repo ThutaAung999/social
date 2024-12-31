@@ -1,7 +1,11 @@
-    import React from "react";
-    import "./mainPost.css";
-    const MainPost = () => {
-    return <div className="mainPostContainer">MainPost</div>;
-    };
+import './mainPost.css';
+import ContentPost from '../ContentPostContainer/ContentPost';
+const MainPost = () => {
+  return (
+    <div className="mainPostContainer">
+      <ContentPost />
+    </div>
+  );
+};
 
-    export default MainPost;
+export default MainPost;
