@@ -53,6 +53,7 @@ export default [
       'react/react-in-jsx-scope': 'off', // Disable for React 17+ JSX runtime
       'no-unused-vars': ['error', { args: 'none', ignoreRestSiblings: true }], // Highlight unused variables and imports
       'no-console': ['warn'], // Warn for console.log statements
+      'linebreak-style': ['error', 'unix'], // Enforce LF line endings
     },
   },
 ];
