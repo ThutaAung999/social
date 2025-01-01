@@ -9,6 +9,10 @@ import anotherLikeIcon from '../Images/setLike.png';
 const Post = () => {
    const [like, setLike] = useState(LikeIcon);
    const [count, setCount] = useState(10);
+   const [Comments, setComments] = useState([]);
+   const [Commentwriting, setCommentwriting] = useState('');
+
+   const [show, setShow] = useState(false);
 
    const handleLike = () => {
       if (like === LikeIcon) {
@@ -18,7 +22,37 @@ const Post = () => {
          setLike(LikeIcon);
          setCount(count - 1);
       }
-      console.log(count);
+      //console.log(count);
+   };
+
+   const addComment = () => {
+      //fake data
+      const comment = {
+         id: 'gdsdsdsdsd33343dfdfdff',
+         username: 'Sumen',
+         title: `${Commentwriting}`,
+      };
+      //setComments(Comments.concat(comment));
+      setComments([...Comments, comment]);
+      /* setComments((prevComments) => {
+         return [...prevComments, comment];
+      }); */
+   };
+
+   const handleComment = () => {
+      if (Commentwriting.trim() === '') return; // Prevent empty comments
+      addComment();
+      setCommentwriting(''); // Clear the input field
+   };
+
+   console.log(Comments);
+
+   const handleshow = () => {
+      if (show === false) {
+         setShow(true);
+      } else {
+         setShow(false);
+      }
    };
    return (
       <div className="postContainer">
@@ -62,17 +96,7 @@ const Post = () => {
                   အခြေခံအကျဆုံးအတန်းဖြစ်သည့် Road to Cyber Security
                   ဆိုသည့်အတန်းကို တက်ရောက်နိုင်ပါသည်။ Cyber Security
                   အပိုင်းကိုစိတ်ဝင်စားသောသူများနှင့် ကွန်ပျူတာ အခြေခံရှိသည့်
-                  မည်သူမဆို တက်ရောက်နိုင်သော အတန်းလည်းဖြစ်ပါသည်။ Cyber Security
-                  မှာပါဝင်တဲ့အဓိက လုပ်ဆောင်နေသော
-                  နည်းပညာအကြောင်းများကိုသင်ကြားရှင်းလင်းပေးမည်ဖြစ်ပြီး
-                  နည်းမှန်လမ်းမှန်ဖြင့် အချိန်တိုအတွင်း ဝါသနာပါသည့်
-                  အသက်မွေးလမ်းကြောင်းတစ်ခုကို နားလည်သဘောပေါက်နိုင်စေရန်
-                  ရည်ရွယ်ပါသည်။ မှန်ကန်သောလမ်းကြောင်းတစ်ခုကို သေချာနားလည်မှသာ
-                  နည်းလမ်းမှန်ရွေးချယ်နိုင်သည် ဖြစ်သည့်အတွက် Cyber Security
-                  Foundation Class ကိုဖွင့်လှစ်လိုက်ပါသည်။ Videos Lessons
-                  ဖြင့်သင်ကြားပေးသော အတန်းဖြစ်သည့်အတွက်လည်း
-                  အဆင်ပြေသည့်အချိန်တွင်လေ့လာနိုင်ပါသည်။ စိတ်ဝင်စားပါက
-                  အသေးစိတ်ကို Messenger ကတဆင့်မေးမြန်းနိုင်ပါသည်။
+                  ......
                </p>
                <img src={`${profileImage}`} className="postImages" alt="" />
                <div style={{ display: 'flex' }}>
@@ -104,6 +128,7 @@ const Post = () => {
                            src={`${CommentIcon}`}
                            className="iconsForPost"
                            alt=""
+                           onClick={handleshow}
                         />
                         <p style={{ marginLeft: '5px' }}> 100K Comments</p>
                      </div>
@@ -124,6 +149,79 @@ const Post = () => {
                      <p style={{ marginLeft: '5px' }}> Share</p>
                   </div>
                </div>
+
+               {show === true ? (
+                  <div style={{ padding: '10px' }}>
+                     <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img
+                           src={`${profileImage}`}
+                           className="postImage"
+                           alt="profile"
+                        />
+                        {/*  <p style={{ marginLeft: '6px' }}>Sumen</p> */}
+                        <input
+                           type="text"
+                           placeholder="Write a comment..."
+                           className="commentInput"
+                           value={Commentwriting}
+                           onChange={(e) => setCommentwriting(e.target.value)}
+                        />
+                        <button
+                           className="addCommentbtn"
+                           onClick={handleComment}
+                        >
+                           Post
+                        </button>
+                     </div>
+                     {Comments.map((comment) => (
+                        <div key={comment.id} style={{ alignItems: 'center' }}>
+                           <div
+                              style={{ display: 'flex', alignItems: 'center' }}
+                           >
+                              <img
+                                 src={`${profileImage}`}
+                                 className="postImage"
+                                 alt="profile"
+                              />
+                              <p
+                                 style={{
+                                    marginLeft: '6px',
+                                    fontSize: 18,
+                                    marginTop: 6,
+                                 }}
+                              >
+                                 {comment.username}
+                              </p>
+                           </div>
+
+                           <p
+                              style={{
+                                 marginLeft: '55px',
+                                 textAlign: 'start',
+                                 marginTop: -16,
+                                 fontSize: 20,
+                              }}
+                           >
+                              {comment.title}
+                           </p>
+
+                           <p
+                              style={{
+                                 marginLeft: '55px',
+                                 textAlign: 'start',
+                                 marginTop: -10,
+                                 color: '#aaa',
+                                 fontSize: 11,
+                              }}
+                           >
+                              Reply
+                           </p>
+                        </div>
+                     ))}
+                  </div>
+               ) : (
+                  ''
+               )}
             </div>
          </div>
       </div>

@@ -31,3 +31,22 @@
    width: 20px;
    margin-left: 380px;
 }
+
+.commentInput {
+   width: 20pc;
+   margin-left: 10px;
+   border: none;
+   height: 6vh;
+}
+
+.addCommentbtn {
+   padding: 9px;
+   border: none;
+   background-color: black;
+   color: white;
+   border-radius: 6px;
+   margin-left: 39px;
+   cursor: pointer;
+   padding-left: 40px;
+   padding-right: 40px;
+}
