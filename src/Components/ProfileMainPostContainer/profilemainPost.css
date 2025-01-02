@@ -1,0 +1,12 @@
+.profileMainPostContainer {
+   flex: 3;
+   background-color: rgb(235, 238, 242);
+}
+
+.profileCoverImage {
+   width: 92%;
+   height: 20vh;
+   border-radius: 10px;
+   object-fit: cover;
+   margin-top: 20px;
+}
