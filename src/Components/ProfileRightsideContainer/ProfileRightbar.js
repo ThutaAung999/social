@@ -1,5 +1,5 @@
 import './profilerightbar.css';
-import ads from '../Images/ads.jpg';
+//import ads from '../Images/ads.jpg';
 import image1 from '../Images/image1.jpg';
 import image2 from '../Images/image2.jpg';
 import image3 from '../Images/image3.jpg';
@@ -12,53 +12,49 @@ import addFriends from '../Images/add-user.png';
 const ProfileRightbar = () => {
    return (
       <div className="ProfileRightbar">
-         <div className="rightContainer">
-            <div className="adsContainer">
-               <img src={`${ads}`} className="adsimg" alt="" />
-               <div>
-                  <p
-                     style={{
-                        textAlign: 'start',
-                        marginLeft: '10px',
-                        marginTop: '-20px',
-                     }}
-                  >
-                     CodeDemy
-                  </p>
-                  <p
-                     style={{
-                        textAlign: 'start',
-                        marginLeft: '10px',
-                        fontSize: '12px',
-                        marginTop: '-16px',
-                     }}
-                  >
-                     Buy codedemy course
+         <div className="ProfilerightContainer">
+            <h3>Friend Requests</h3>
+            <div>
+               <div
+                  style={{
+                     display: 'flex',
+                     alignItems: 'center',
+                     marginLeft: '10px',
+                     marginTop: '10px',
+                     cursor: 'pointer',
+                  }}
+               >
+                  <img src={`${image2}`} className="friendsImage" alt="" />
+                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                     Maw want to make you friend
                   </p>
                </div>
-            </div>
-
-            <div className="adsContainer">
-               <img src={`${image2}`} className="adsimg" alt="" />
-               <div>
-                  <p
-                     style={{
-                        textAlign: 'start',
-                        marginLeft: '10px',
-                        marginTop: '-20px',
-                     }}
-                  >
-                     CodeDemy
+               <div
+                  style={{
+                     display: 'flex',
+                     alignItems: 'center',
+                     marginLeft: '10px',
+                     marginTop: '10px',
+                     cursor: 'pointer',
+                  }}
+               >
+                  <img src={`${image3}`} className="friendsImage" alt="" />
+                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                     Sider want to make you friend
                   </p>
-                  <p
-                     style={{
-                        textAlign: 'start',
-                        marginLeft: '10px',
-                        fontSize: '12px',
-                        marginTop: '-16px',
-                     }}
-                  >
-                     Buy codedemy course
+               </div>
+               <div
+                  style={{
+                     display: 'flex',
+                     alignItems: 'center',
+                     marginLeft: '10px',
+                     marginTop: '10px',
+                     cursor: 'pointer',
+                  }}
+               >
+                  <img src={`${image1}`} className="friendsImage" alt="" />
+                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                     Joe want to make you friend
                   </p>
                </div>
             </div>

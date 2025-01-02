@@ -86,10 +86,11 @@ const ProfileLeftbar = () => {
                <h5
                   style={{
                      color: 'black',
-                     marginLeft: 20,
+                     marginLeft: 10,
                      fontSize: 14,
                      marginRight: 30,
                      marginTop: 40,
+                     textAlign: 'start',
                   }}
                >
                   User Info

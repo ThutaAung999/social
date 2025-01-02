@@ -2,12 +2,14 @@
    flex: 1;
 }
 
-.rightContainer {
+.ProfilerightContainer {
    width: 20pc;
-   height: 30vh;
+   height: 36vh;
    background-color: white;
    margin-top: 20px;
    border-radius: 15px;
+   overflow: hidden;
+   overflow-y: scroll;
 }
 
 .adsimg {
@@ -43,4 +45,11 @@
 .addfriend {
    width: 20px;
    height: 20px;
+}
+
+.friendsImage {
+   width: 60px;
+   height: 60px;
+   object-fit: cover;
+   border-radius: 10px;
 }
