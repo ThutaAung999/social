@@ -21,6 +21,7 @@ const ProfileMainPost = () => {
          </div>
          <ContentPost />
          <Post />
+
          <Post />
       </div>
    );

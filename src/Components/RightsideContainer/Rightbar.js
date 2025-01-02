@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import './rightbar.css';
 import ads from '../Images/ads.jpg';
 import image1 from '../Images/image1.jpg';
