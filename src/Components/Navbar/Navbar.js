@@ -4,6 +4,7 @@ import SearhIcon from '../Images/search.png';
 import Notifications from '../Images/bell.png';
 import Message from '../Images/message.png';
 import ProfileImage from '../Images/Profile.png';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
    return (
@@ -26,10 +27,17 @@ const Navbar = () => {
          <div className="IconsContainer">
             <img src={`${Notifications}`} className="Icons" alt="" />
             <img src={`${Message}`} className="Icons" alt="" />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-               <img src={`${ProfileImage}`} className="ProfileImage" alt="" />
-               <p style={{ marginLeft: '5px' }}>Thuta</p>
-            </div>
+
+            <Link to={'/Profile/thata_33434333323gddfd'}>
+               <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img
+                     src={`${ProfileImage}`}
+                     className="ProfileImage"
+                     alt=""
+                  />
+                  <p style={{ marginLeft: '5px' }}>Thuta</p>
+               </div>
+            </Link>
          </div>
       </div>
    );

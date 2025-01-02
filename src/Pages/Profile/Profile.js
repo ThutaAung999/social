@@ -1,6 +1,7 @@
-import MainPost from '../../Components/MainPostContainer/MainPost';
+// import MainPost from '../../Components/MainPostContainer/MainPost';
 import Navbar from '../../Components/Navbar/Navbar';
 import ProfileLeftbar from '../../Components/ProfileLeftsideContainer/ProfileLeftbar';
+import ProfileMainPost from '../../Components/ProfileMainPostContainer/ProfileMainPost';
 import ProfileRightbar from '../../Components/ProfileRightsideContainer/ProfileRightbar';
 import './profile.css';
 const Profile = () => {
@@ -9,7 +10,7 @@ const Profile = () => {
          <Navbar />
          <div className="subProfileContainer">
             <ProfileLeftbar />
-            <MainPost />
+            <ProfileMainPost />
             <ProfileRightbar />
          </div>
       </div>

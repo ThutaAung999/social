@@ -15,47 +15,166 @@ const ProfileRightbar = () => {
          <div className="ProfilerightContainer">
             <h3>Friend Requests</h3>
             <div>
-               <div
-                  style={{
-                     display: 'flex',
-                     alignItems: 'center',
-                     marginLeft: '10px',
-                     marginTop: '10px',
-                     cursor: 'pointer',
-                  }}
-               >
-                  <img src={`${image2}`} className="friendsImage" alt="" />
-                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                     Maw want to make you friend
-                  </p>
+               <div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: '10px',
+                        marginTop: '10px',
+                        cursor: 'pointer',
+                     }}
+                  >
+                     <img src={`${image2}`} className="friendsImage" alt="" />
+                     <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                        Maw want to make you friend
+                     </p>
+                  </div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        marginTop: '10px',
+                     }}
+                  >
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Accept
+                     </button>
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Reject
+                     </button>
+                  </div>
                </div>
-               <div
-                  style={{
-                     display: 'flex',
-                     alignItems: 'center',
-                     marginLeft: '10px',
-                     marginTop: '10px',
-                     cursor: 'pointer',
-                  }}
-               >
-                  <img src={`${image3}`} className="friendsImage" alt="" />
-                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                     Sider want to make you friend
-                  </p>
+
+               <div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: '10px',
+                        marginTop: '10px',
+                        cursor: 'pointer',
+                     }}
+                  >
+                     <img src={`${image3}`} className="friendsImage" alt="" />
+                     <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                        Phyu Phyu Htwe want to make you friend
+                     </p>
+                  </div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        marginTop: '10px',
+                     }}
+                  >
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Accept
+                     </button>
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Reject
+                     </button>
+                  </div>
                </div>
-               <div
-                  style={{
-                     display: 'flex',
-                     alignItems: 'center',
-                     marginLeft: '10px',
-                     marginTop: '10px',
-                     cursor: 'pointer',
-                  }}
-               >
-                  <img src={`${image1}`} className="friendsImage" alt="" />
-                  <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                     Joe want to make you friend
-                  </p>
+
+               <div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: '10px',
+                        marginTop: '10px',
+                        cursor: 'pointer',
+                     }}
+                  >
+                     <img src={`${image5}`} className="friendsImage" alt="" />
+                     <p style={{ textAlign: 'start', marginLeft: '10px' }}>
+                        Thuzar want to make you friend
+                     </p>
+                  </div>
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        marginTop: '10px',
+                     }}
+                  >
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Accept
+                     </button>
+                     <button
+                        style={{
+                           paddingLeft: '30px',
+                           paddingRight: '30px',
+                           paddingTop: 5,
+                           paddingBottom: 5,
+                           border: 'none',
+                           backgroundColor: 'black',
+                           color: 'white',
+                           borderRadius: '10px',
+                        }}
+                     >
+                        Reject
+                     </button>
+                  </div>
                </div>
             </div>
          </div>
