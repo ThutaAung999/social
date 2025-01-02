@@ -10,165 +10,152 @@ const ProfileLeftbar = () => {
    return (
       <div className="ProfileLeftbar">
          <div className="NotificationsContainer">
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-               <p style={{ marginLeft: '-14px' }}>Notifiations</p>
-               <p style={{ color: '#aaa', marginLeft: '40px' }}>See all</p>
-            </div>
+            <img src={`${image}`} className="ProfileImageCover" alt="" />
+
             <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
+               style={{ display: 'flex', alignItems: 'center', marginTop: -30 }}
             >
-               <img src={`${image}`} className="notificationImg" alt="" />
+               <img src={`${image3}`} className="ProfilepageImage" alt="" />
+               <div>
+                  <p
+                     style={{
+                        marginLeft: '6px',
+                        marginTop: '20px',
+                        color: 'black',
+                        textAlign: 'start',
+                     }}
+                  >
+                     Suman
+                  </p>
+                  <p
+                     style={{
+                        marginLeft: '6px',
+                        color: 'black',
+                        textAlign: 'start',
+                        marginTop: '-16px',
+                        fontSize: '11px',
+                     }}
+                  >
+                     Web Developer
+                  </p>
+               </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+               <p style={{ color: 'black', marginLeft: 20, fontSize: 14 }}>
+                  Profile Views
+               </p>
                <p
                   style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
+                     color: 'black',
+                     marginRight: 20,
+                     fontSize: 12,
+                     marginTop: 17,
                   }}
                >
-                  Moe Moe started to follow you
+                  100K
                </p>
-               <img src={`${image1}`} className="followinguserimage" alt="" />
             </div>
+            {/*  <hr style={{ marginTop: -10 }} /> */}
             <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
+               style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginTop: -20,
+               }}
             >
-               <img src={`${image}`} className="notificationImg" alt="" />
+               <p style={{ color: 'black', marginLeft: 20, fontSize: 14 }}>
+                  Friends
+               </p>
                <p
                   style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
+                     color: 'black',
+                     marginRight: 20,
+                     fontSize: 12,
+                     marginTop: 17,
                   }}
                >
-                  Suman started to follow you
+                  4321
                </p>
-               <img src={`${image2}`} className="followinguserimage" alt="" />
             </div>
+            {/*   <hr style={{ marginTop: -10 }} /> */}
             <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
+               style={{
+                  marginTop: -20,
+               }}
             >
-               <img src={`${image2}`} className="notificationImg" alt="" />
+               <h5
+                  style={{
+                     color: 'black',
+                     marginLeft: 20,
+                     fontSize: 14,
+                     marginRight: 30,
+                     marginTop: 40,
+                  }}
+               >
+                  User Info
+               </h5>
+
                <p
                   style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
+                     color: 'black',
+                     // marginRight: 8,
+                     fontSize: 12,
+                     marginTop: -20,
                      textAlign: 'start',
-                     width: '120px',
+                     marginLeft: 10,
                   }}
                >
-                  Madan like your post
+                  yber Security Foundation Course Cyber Security နဲ့ပတ်သက်ပြီး
+                  အခုမှစလေ့လာမည့်သူတစ်ယေ
                </p>
-               <img src={`${image3}`} className="likeImage" alt="" />
             </div>
-            <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
+            <button
+               style={{
+                  width: '100%',
+                  paddintTop: 7,
+                  paddingBottom: 7,
+                  backgroundColor: 'green',
+                  color: 'white',
+               }}
             >
-               <img src={`${image}`} className="notificationImg" alt="" />
-               <p
-                  style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
-                  }}
-               >
-                  Toe Toe started to follow you
-               </p>
-               <img src={`${image4}`} className="followinguserimage" alt="" />
-            </div>
-            <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
-            >
-               <img src={`${image6}`} className="notificationImg" alt="" />
-               <p
-                  style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
-                  }}
-               >
-                  Moe Moe started to follow you
-               </p>
-               <img src={`${image5}`} className="followinguserimage" alt="" />
-            </div>
-            <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
-            >
-               <img src={`${image3}`} className="notificationImg" alt="" />
-               <p
-                  style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
-                  }}
-               >
-                  Madan like your post
-               </p>
-               <img src={`${image6}`} className="likeImage" alt="" />
-            </div>
-            <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
-            >
-               <img src={`${image}`} className="notificationImg" alt="" />
-               <p
-                  style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
-                  }}
-               >
-                  Madan like your post
-               </p>
-               <img src={`${image}`} className="likeImage" alt="" />
-            </div>
-            <div
-               style={{ display: 'flex', alignItems: 'center', marginTop: -10 }}
-            >
-               <img src={`${image}`} className="notificationImg" alt="" />
-               <p
-                  style={{
-                     marginLeft: '5px',
-                     color: '#aaa',
-                     fontSize: 13,
-                     textAlign: 'start',
-                     width: '120px',
-                  }}
-               >
-                  Madan like your post
-               </p>
-               <img src={`${image}`} className="likeImage" alt="" />
-            </div>
+               Edit Bio
+            </button>
          </div>
 
          {/* end of notifications */}
 
          <div className="NotificationsContainer">
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-               <p style={{ marginLeft: '-14px' }}>Explorers</p>
-               <p style={{ color: '#aaa', marginLeft: '40px' }}>See all</p>
+            <h3>Your fireneds</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+               <p style={{ marginLeft: 10 }}>Friends</p>
+               <p style={{ marginRight: 10, color: '#aaa' }}>See all</p>
             </div>
-
-            <div>
-               <img src={`${image}`} className="explorerImage" alt="" />
-               <img src={`${image1}`} className="explorerImage" alt="" />
-               <img src={`${image2}`} className="explorerImage" alt="" />
-               <img src={`${image3}`} className="explorerImage" alt="" />
-               <img src={`${image4}`} className="explorerImage" alt="" />
-               <img src={`${image5}`} className="explorerImage" alt="" />
-               <img src={`${image6}`} className="explorerImage" alt="" />
-               <img src={`${image}`} className="explorerImage" alt="" />
+            <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 5 }}>
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image1}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Aung Aung</p>
+               </div>
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image2}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Su Su</p>
+               </div>
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image3}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Chaw Chaw </p>
+               </div>
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image4}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Win Win</p>
+               </div>
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image5}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Gold Spider</p>
+               </div>
+               ``{' '}
+               <div style={{ marginLeft: 4 }}>
+                  <img src={`${image6}`} className="friendImage" alt="" />
+                  <p style={{ marginTop: -2 }}>Pwint Oo</p>
+               </div>
             </div>
          </div>
       </div>

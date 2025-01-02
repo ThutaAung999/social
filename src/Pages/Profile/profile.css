@@ -1,6 +1,6 @@
 .ProfileContainer {
-   background-color: rgb(235, 235, 235);
-   height: 100vh;
+   background-color: rgb(235, 238, 242);
+   /* height: 100vh; */
 }
 .subProfileContainer {
    display: flex;

@@ -11,32 +11,24 @@
    overflow: hidden;
    overflow-y: scroll;
 }
-.notificationImg {
-   width: 37px;
-   height: 37px;
+
+.ProfilepageImage {
+   width: 60px;
+   height: 60px;
    border-radius: 50%;
    margin-left: 10px;
-}
-
-.likeImage {
-   width: 30px;
-   height: 30px;
-   margin-left: 43px;
-   border-radius: 3px;
-}
-
-.followinguserimage {
-   width: 35px;
-   height: 35px;
-   border-radius: 50%;
-   margin-left: 43px;
-}
-
-.explorerImage {
-   width: 86px;
-   height: 150px;
    object-fit: cover;
-   margin-left: 4px;
-   margin-top: 6px;
-   border-radius: 4px;
+}
+
+.ProfileImageCover {
+   width: 270px;
+   height: 100px;
+   object-fit: cover;
+}
+
+.friendImage {
+   width: 80px;
+   height: 80px;
+   object-fit: cover;
+   border-radius: 10px;
 }
