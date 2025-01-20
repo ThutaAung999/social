@@ -13,9 +13,9 @@ const ProfileRightbar = () => {
    return (
       <div className="ProfileRightbar">
          <div className="ProfilerightContainer">
-            <h3>Friend Requests</h3>
+            <h3>Followers</h3>
             <div>
-               <div>
+               <div style={{ marginTop: '10px' }}>
                   <div
                      style={{
                         display: 'flex',
@@ -27,49 +27,12 @@ const ProfileRightbar = () => {
                   >
                      <img src={`${image2}`} className="friendsImage" alt="" />
                      <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                        Maw want to make you friend
+                        Maw Maw
                      </p>
-                  </div>
-                  <div
-                     style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                        marginTop: '10px',
-                     }}
-                  >
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Accept
-                     </button>
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Reject
-                     </button>
                   </div>
                </div>
 
-               <div>
+               <div style={{ marginTop: '10px' }}>
                   <div
                      style={{
                         display: 'flex',
@@ -81,49 +44,12 @@ const ProfileRightbar = () => {
                   >
                      <img src={`${image3}`} className="friendsImage" alt="" />
                      <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                        Phyu Phyu Htwe want to make you friend
+                        Phyu Phyu Htwe
                      </p>
-                  </div>
-                  <div
-                     style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                        marginTop: '10px',
-                     }}
-                  >
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Accept
-                     </button>
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Reject
-                     </button>
                   </div>
                </div>
 
-               <div>
+               <div style={{ marginTop: '10px' }}>
                   <div
                      style={{
                         display: 'flex',
@@ -135,45 +61,8 @@ const ProfileRightbar = () => {
                   >
                      <img src={`${image5}`} className="friendsImage" alt="" />
                      <p style={{ textAlign: 'start', marginLeft: '10px' }}>
-                        Thuzar want to make you friend
+                        Thuzar
                      </p>
-                  </div>
-                  <div
-                     style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                        marginTop: '10px',
-                     }}
-                  >
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Accept
-                     </button>
-                     <button
-                        style={{
-                           paddingLeft: '30px',
-                           paddingRight: '30px',
-                           paddingTop: 5,
-                           paddingBottom: 5,
-                           border: 'none',
-                           backgroundColor: 'black',
-                           color: 'white',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        Reject
-                     </button>
                   </div>
                </div>
             </div>

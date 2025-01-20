@@ -4,21 +4,61 @@ import LikeIcon from '../Images/like.png';
 import CommentIcon from '../Images/speech-bubble.png';
 import ShareIcon from '../Images/share.png';
 import MoreOption from '../Images/more.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import anotherLikeIcon from '../Images/setLike.png';
-const Post = () => {
-   const [like, setLike] = useState(LikeIcon);
-   const [count, setCount] = useState(10);
+import axios from 'axios';
+const Post = (post) => {
+   const [user, setUser] = useState([]);
+   useEffect(() => {
+      const getUser = async () => {
+         try {
+            const res = await axios.get(
+               `http://localhost:5000/api/user/post/user/details/${post?.post.user}`,
+            );
+            setUser(res.data);
+            // console.log('res.data', res.data);
+         } catch (error) {
+            console.log('Some error occurs :', error);
+         }
+      };
+      getUser();
+   }, []);
+
+   const userId = '677edae3231634cad19bcebf';
+   const accessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
+
+   const [like, setLike] = useState([
+      post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
+   ]);
+   const [count, setCount] = useState(post?.post?.like?.length);
    const [Comments, setComments] = useState([]);
    const [Commentwriting, setCommentwriting] = useState('');
 
    const [show, setShow] = useState(false);
 
-   const handleLike = () => {
-      if (like === LikeIcon) {
+   //console.log('Post : ', post);
+   //console.log('Post Title : ', post?.post.title);
+
+   const handleLike = async () => {
+      if (like == LikeIcon) {
+         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+               token: accessToken,
+            },
+         });
          setLike(anotherLikeIcon);
          setCount(count + 1);
       } else {
+         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+               token: accessToken,
+            },
+         });
          setLike(LikeIcon);
          setCount(count - 1);
       }
@@ -45,7 +85,7 @@ const Post = () => {
       setCommentwriting(''); // Clear the input field
    };
 
-   console.log(Comments);
+   //console.log(Comments);
 
    const handleshow = () => {
       if (show === false) {
@@ -54,19 +94,30 @@ const Post = () => {
          setShow(false);
       }
    };
+
+   //console.log('user :', user);
    return (
       <div className="postContainer">
          <div className="subPostContainer">
             <div>
                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img
-                     src={`${profileImage}`}
-                     className="postImage"
-                     alt="profile"
-                  />
+                  {user?.profile == '' ? (
+                     <img
+                        src={`${profileImage}`}
+                        className="postImage"
+                        alt="profile"
+                     />
+                  ) : (
+                     <img
+                        src={`${user?.profile}`}
+                        className="postImage"
+                        alt="profile"
+                     />
+                  )}
+
                   <div>
                      <p style={{ marginLeft: '5px', textAlign: 'start' }}>
-                        Sumen
+                        {user?.username}
                      </p>
                      <p
                         style={{
@@ -91,14 +142,9 @@ const Post = () => {
                      marginTop: '0px',
                   }}
                >
-                  Cyber Security Foundation Course Cyber Security နဲ့ပတ်သက်ပြီး
-                  အခုမှစလေ့လာမည့်သူတစ်ယောက်ဖြစ်ပါက Creatigon ရဲ့
-                  အခြေခံအကျဆုံးအတန်းဖြစ်သည့် Road to Cyber Security
-                  ဆိုသည့်အတန်းကို တက်ရောက်နိုင်ပါသည်။ Cyber Security
-                  အပိုင်းကိုစိတ်ဝင်စားသောသူများနှင့် ကွန်ပျူတာ အခြေခံရှိသည့်
-                  ......
+                  {post?.post.title}
                </p>
-               <img src={`${profileImage}`} className="postImages" alt="" />
+               <img src={`${post?.post.image}`} className="postImages" alt="" />
                <div style={{ display: 'flex' }}>
                   <div style={{ display: 'flex', marginLeft: '10px' }}>
                      <div
@@ -114,7 +160,7 @@ const Post = () => {
                            alt=""
                            onClick={handleLike}
                         />
-                        <p style={{ marginLeft: '5px' }}> {count} Likes</p>``
+                        <p style={{ marginLeft: '5px' }}> {count} Likes</p>
                      </div>
                      <div
                         style={{
@@ -130,7 +176,9 @@ const Post = () => {
                            alt=""
                            onClick={handleshow}
                         />
-                        <p style={{ marginLeft: '5px' }}> 100K Comments</p>
+                        <p style={{ marginLeft: '5px' }}>
+                           {post?.post?.comments?.length} comments
+                        </p>
                      </div>
                   </div>
                   <div

@@ -10,7 +10,36 @@ import image6 from '../Images/image6.jpg';
 import image7 from '../Images/image1.jpg';
 
 import addFriends from '../Images/add-user.png';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 const Rightbar = () => {
+   const accessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
+
+   const [users, setUsers] = useState([]);
+   useEffect(() => {
+      const getUser = async () => {
+         try {
+            const res = await axios.get(
+               'http://localhost:5000/api/user/all/user',
+               {
+                  headers: {
+                     token: accessToken,
+                  },
+               },
+            );
+            setUsers(res.data);
+            // console.log('res.data', res.data);
+         } catch (error) {
+            console.log('Some error occurs :', error);
+         }
+      };
+      getUser();
+   }, []);
+
+   console.log('users in rightbar :', users);
+
    return (
       <div className="rightbar">
          <div className="rightContainer">
@@ -70,46 +99,58 @@ const Rightbar = () => {
                {' '}
                Suggested for you
             </h3>
-            <div style={{ marginTop: '-10px' }}>
-               <div
-                  style={{
-                     display: 'flex',
-                     alignItems: 'center',
-                     justifyContent: 'space-between',
-                  }}
-               >
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                     <img src={`${image2}`} className="profileImage" alt="" />
-                     <div>
-                        <p style={{ marginLeft: '10px', textAlign: 'start' }}>
-                           Suman
-                        </p>
-                        <p
-                           style={{
-                              marginLeft: '10px',
-                              textAlign: 'start',
-                              marginTop: '-16px',
-                              fontSize: 11,
-                              color: '#aaa',
-                           }}
-                        >
-                           Suggested for you
-                        </p>
-                     </div>
-                  </div>
+            {users.map((item) => {
+               <div style={{ marginTop: '-10px' }}>
                   <div
                      style={{
-                        backgroundColor: '#aaa',
-                        padding: '10px',
-                        marginRight: 13,
-                        borderRadius: '50%',
-                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
                      }}
                   >
-                     <img className="addfriend" src={`${addFriends}`} alt="" />
+                     <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img
+                           src={`${image2}`}
+                           className="profileImage"
+                           alt=""
+                        />
+                        <div>
+                           <p
+                              style={{ marginLeft: '10px', textAlign: 'start' }}
+                           >
+                              Suman
+                           </p>
+                           <p
+                              style={{
+                                 marginLeft: '10px',
+                                 textAlign: 'start',
+                                 marginTop: '-16px',
+                                 fontSize: 11,
+                                 color: '#aaa',
+                              }}
+                           >
+                              Suggested for you
+                           </p>
+                        </div>
+                     </div>
+                     <div
+                        style={{
+                           backgroundColor: '#aaa',
+                           padding: '10px',
+                           marginRight: 13,
+                           borderRadius: '50%',
+                           cursor: 'pointer',
+                        }}
+                     >
+                        <img
+                           className="addfriend"
+                           src={`${addFriends}`}
+                           alt=""
+                        />
+                     </div>
                   </div>
-               </div>
-            </div>
+               </div>;
+            })}
 
             <div style={{ marginTop: '-10px' }}>
                <div

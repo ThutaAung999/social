@@ -64,7 +64,7 @@ const ProfileLeftbar = () => {
                }}
             >
                <p style={{ color: 'black', marginLeft: 20, fontSize: 14 }}>
-                  Friends
+                  Followers
                </p>
                <p
                   style={{
@@ -126,34 +126,33 @@ const ProfileLeftbar = () => {
          {/* end of notifications */}
 
          <div className="NotificationsContainer">
-            <h3>Your fireneds</h3>
+            <h3>Followings</h3>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                <p style={{ marginLeft: 10 }}>Friends</p>
                <p style={{ marginRight: 10, color: '#aaa' }}>See all</p>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 5 }}>
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image1}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Aung Aung</p>
                </div>
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image2}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Su Su</p>
                </div>
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image3}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Chaw Chaw </p>
                </div>
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image4}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Win Win</p>
                </div>
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image5}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Gold Spider</p>
                </div>
-               ``{' '}
-               <div style={{ marginLeft: 4 }}>
+               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
                   <img src={`${image6}`} className="friendImage" alt="" />
                   <p style={{ marginTop: -2 }}>Pwint Oo</p>
                </div>
