@@ -1,6 +1,6 @@
 //import React from 'react';
 import './leftbar.css';
-import image from '../Images/Profile.png';
+import image from '../Images/profile.jpeg';
 import image1 from '../Images/image1.jpg';
 import image2 from '../Images/image2.jpg';
 import image3 from '../Images/image3.jpg';
@@ -14,6 +14,9 @@ const Leftbar = () => {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
    const [post, setPost] = useState([]);
 
+   /* const image =
+      'https://images.pexels.com/photos/13004916/pexels-photo-13004916.jpeg?auto=compress&cs=tinysrgb&w=600';
+ */
    useEffect(() => {
       const getPost = async () => {
          try {

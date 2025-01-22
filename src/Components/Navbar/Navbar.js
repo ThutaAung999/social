@@ -3,7 +3,7 @@ import './navbar.css';
 import SearhIcon from '../Images/search.png';
 import Notifications from '../Images/bell.png';
 import Message from '../Images/message.png';
-import ProfileImage from '../Images/Profile.png';
+import ProfileImage from '../Images/profile.jpeg';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -35,7 +35,7 @@ const Navbar = () => {
                      className="ProfileImage"
                      alt=""
                   />
-                  <p style={{ marginLeft: '5px' }}>Thuta</p>
+                  <p style={{ marginLeft: '5px' }}>Aung Aung</p>
                </div>
             </Link>
          </div>

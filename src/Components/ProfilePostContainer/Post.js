@@ -7,16 +7,24 @@ import MoreOption from '../Images/more.png';
 import { useEffect, useState } from 'react';
 import anotherLikeIcon from '../Images/setLike.png';
 import axios from 'axios';
-const Post = (post) => {
+const Post = (detail) => {
+  // console.log('detail in post', detail);
+   // console.log(detail.detail.title);
+   const [count, setCount] = useState(0);
+   const [Comments, setComments] = useState([]);
+   const [Commentwriting, setCommentwriting] = useState('');
+
+   const [show, setShow] = useState(false);
+
    const [user, setUser] = useState([]);
    useEffect(() => {
       const getUser = async () => {
-         try {
+         try {// post ကိုတင်တဲ့  user's  details ကို ယူတာ
             const res = await axios.get(
-               `http://localhost:5000/api/user/post/user/details/${post?.post.user}`,
+               `http://localhost:5000/api/user/post/user/details/${detail?.detail.user}`,
             );
             setUser(res.data);
-            // console.log('res.data', res.data);
+           //  console.log('res.data', res.data);
          } catch (error) {
             console.log('Some error occurs :', error);
          }
@@ -24,44 +32,32 @@ const Post = (post) => {
       getUser();
    }, []);
 
-   const userId = '677edae3231634cad19bcebf';
-   const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
-
-   const [like, setLike] = useState([
-      post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
-   ]);
-   const [count, setCount] = useState(post?.post?.like?.length);
-   const [Comments, setComments] = useState([]);
-   const [Commentwriting, setCommentwriting] = useState('');
-
-   const [show, setShow] = useState(false);
-
+   //console.log('user in post', user);
    //console.log('Post : ', post);
    //console.log('Post Title : ', post?.post.title);
 
    const handleLike = async () => {
-      if (like == LikeIcon) {
-         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
-            method: 'PUT',
-            headers: {
-               'Content-Type': 'application/json',
-               token: accessToken,
-            },
-         });
-         setLike(anotherLikeIcon);
-         setCount(count + 1);
-      } else {
-         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
-            method: 'PUT',
-            headers: {
-               'Content-Type': 'application/json',
-               token: accessToken,
-            },
-         });
-         setLike(LikeIcon);
-         setCount(count - 1);
-      }
+      // if (like == LikeIcon) {
+      //    await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+      //       method: 'PUT',
+      //       headers: {
+      //          'Content-Type': 'application/json',
+      //          token: accessToken,
+      //       },
+      //    });
+      //    setLike(anotherLikeIcon);
+      //    setCount(count + 1);
+      // } else {
+      //    await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+      //       method: 'PUT',
+      //       headers: {
+      //          'Content-Type': 'application/json',
+      //          token: accessToken,
+      //       },
+      //    });
+      //    setLike(LikeIcon);
+      //    setCount(count - 1);
+      // }
       //console.log(count);
    };
 
@@ -101,19 +97,11 @@ const Post = (post) => {
          <div className="subPostContainer">
             <div>
                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {user?.profile == '' ? (
-                     <img
-                        src={`${profileImage}`}
-                        className="postImage"
-                        alt="profile"
-                     />
-                  ) : (
-                     <img
-                        src={`${user?.profile}`}
-                        className="postImage"
-                        alt="profile"
-                     />
-                  )}
+                  <img
+                     src={`${user.profile}`}
+                     className="postImage"
+                     alt="profile"
+                  />
 
                   <div>
                      <p style={{ marginLeft: '5px', textAlign: 'start' }}>
@@ -142,10 +130,10 @@ const Post = (post) => {
                      marginTop: '0px',
                   }}
                >
-                  {post?.post?.title}
+                  {detail?.detail?.title}
                </p>
                <img
-                  src={`${post?.post?.image}`}
+                  src={`${detail?.detail?.image}`}
                   className="postImages"
                   alt=""
                />
@@ -158,13 +146,15 @@ const Post = (post) => {
                            cursor: 'pointer',
                         }}
                      >
-                        <img
+                        {/* <img
                            src={`${like}`}
                            className="iconsForPost"
                            alt=""
                            onClick={handleLike}
-                        />
-                        <p style={{ marginLeft: '5px' }}> {count} Likes</p>
+                        /> */}
+                        <p style={{ marginLeft: '5px' }}>
+                           {detail?.detail?.like?.length} Likes
+                        </p>
                      </div>
                      <div
                         style={{
@@ -181,7 +171,7 @@ const Post = (post) => {
                            onClick={handleshow}
                         />
                         <p style={{ marginLeft: '5px' }}>
-                           {post?.post?.comments?.length} comments
+                           {detail?.detail?.comments?.length} comments
                         </p>
                      </div>
                   </div>

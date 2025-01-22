@@ -1,9 +1,26 @@
 import './profilemainPost.css';
 import ContentPost from '../ContentPostContainer/ContentPost';
-import Post from '../PostContainer/Post';
-import CoverImage from '../Images/Profile.png';
+import CoverImage from '../Images/profile.jpeg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Post from '../ProfilePostContainer/Post';
 
 const ProfileMainPost = () => {
+   const userId = '677edae3231634cad19bcebf';
+   const [post, setPost] = useState([]);
+   useEffect(() => {
+      const getPost = async () => {
+         try {
+            const res = await axios.get(
+               `http://localhost:5000/api/post/get/post/${userId}`,
+            );
+            setPost(res.data);
+         } catch (error) {
+            console.log('error :', error);
+         }
+      };
+      getPost();
+   }, []);
    return (
       <div className="profileMainPostContainer">
          <div>
@@ -20,9 +37,9 @@ const ProfileMainPost = () => {
             </h2>
          </div>
          <ContentPost />
-         <Post />
-
-         <Post />
+         {post.map((item) => (
+            <Post key={item._id} detail={item} />
+         ))}
       </div>
    );
 };

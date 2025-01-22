@@ -1,12 +1,30 @@
 import './profileleftbar.css';
-import image from '../Images/Profile.png';
-import image1 from '../Images/image1.jpg';
-import image2 from '../Images/image2.jpg';
-import image3 from '../Images/image3.jpg';
-import image4 from '../Images/image4.jpg';
-import image5 from '../Images/image5.jpg';
-import image6 from '../Images/image6.jpg';
+import image from '../Images/profile.jpeg';
+//import image3 from '../Images/image3.jpg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const ProfileLeftbar = () => {
+   const [followingUser, setFollowingUser] = useState([]);
+
+   useEffect(() => {
+      const getFollowingUser = async () => {
+         try {
+            const res = await axios.get(
+               'http://localhost:5000/api/post/following/677edae3231634cad19bcebf',
+            );
+            setFollowingUser(res.data);
+         } catch (error) {
+            console.log('error :', error);
+         }
+      };
+      getFollowingUser();
+   }, []);
+
+   console.log('followingUser :', followingUser);
+
+   const image =
+      'https://images.pexels.com/photos/13004916/pexels-photo-13004916.jpeg?auto=compress&cs=tinysrgb&w=600';
+
    return (
       <div className="ProfileLeftbar">
          <div className="NotificationsContainer">
@@ -15,7 +33,7 @@ const ProfileLeftbar = () => {
             <div
                style={{ display: 'flex', alignItems: 'center', marginTop: -30 }}
             >
-               <img src={`${image3}`} className="ProfilepageImage" alt="" />
+               <img src={`${image}`} className="ProfilepageImage" alt="" />
                <div>
                   <p
                      style={{
@@ -25,7 +43,7 @@ const ProfileLeftbar = () => {
                         textAlign: 'start',
                      }}
                   >
-                     Suman
+                     Aung Aung
                   </p>
                   <p
                      style={{
@@ -131,31 +149,21 @@ const ProfileLeftbar = () => {
                <p style={{ marginLeft: 10 }}>Friends</p>
                <p style={{ marginRight: 10, color: '#aaa' }}>See all</p>
             </div>
+
             <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 5 }}>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image1}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Aung Aung</p>
-               </div>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image2}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Su Su</p>
-               </div>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image3}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Chaw Chaw </p>
-               </div>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image4}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Win Win</p>
-               </div>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image5}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Gold Spider</p>
-               </div>
-               <div style={{ marginLeft: 4, cursor: 'pointer' }}>
-                  <img src={`${image6}`} className="friendImage" alt="" />
-                  <p style={{ marginTop: -2 }}>Pwint Oo</p>
-               </div>
+               {followingUser.map((item) => (
+                  <div
+                     key={item._id}
+                     style={{ marginLeft: 4, cursor: 'pointer' }}
+                  >
+                     <img
+                        src={`${item.profile}`}
+                        className="friendImage"
+                        alt=""
+                     />
+                     <p style={{ marginTop: -2 }}>{item.username}</p>
+                  </div>
+               ))}
             </div>
          </div>
       </div>

@@ -1,5 +1,5 @@
 import './contentpost.css';
-import profileImage from '../Images/Profile.png';
+import profileImage from '../Images/profile.jpeg';
 import imageIcon from '../Images/gallery.png';
 import emojiIcon from '../Images/cat-face.png';
 import videoIcon from '../Images/video.png';
