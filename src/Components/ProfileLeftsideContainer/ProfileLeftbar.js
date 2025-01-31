@@ -8,7 +8,7 @@ import { Link, useLocation } from 'react-router-dom';
 const ProfileLeftbar = () => {
    let location = useLocation();
    let id = location.pathname.split('/')[2];
-
+ 
    const userDetails = useSelector((state) => state.user);
    const user = userDetails.user;
    const accessToken = user?.accessToken;
@@ -22,7 +22,7 @@ const ProfileLeftbar = () => {
       const getuser = async () => {
          try {
             const res = await axios.get(
-               `http://localhost:5000/api/user/post` / user / details`/${id}`,
+               `http://localhost:5000/api/user/post/user/details/${id}`,
             );
             setuser(res.data);
          } catch (error) {
