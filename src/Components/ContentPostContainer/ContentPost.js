@@ -1,10 +1,18 @@
 import './contentpost.css';
-import profileImage from '../Images/profile.jpeg';
+//import profileImage from '../Images/profile.jpeg';
 import imageIcon from '../Images/gallery.png';
 import emojiIcon from '../Images/cat-face.png';
 import videoIcon from '../Images/video.png';
+import { useSelector } from 'react-redux';
 
 const ContentPost = () => {
+   const userDetails = useSelector((state) => state.user);
+   let user = userDetails.user;
+   // let id = user?.user?._id;
+   // console.log('id in mainPost:', id);
+
+   const profileImage = user?.user?.profile;
+
    return (
       <div>
          <div className="ContentUploadContainer">

@@ -5,18 +5,31 @@ import CommentIcon from '../Images/speech-bubble.png';
 import ShareIcon from '../Images/share.png';
 import MoreOption from '../Images/more.png';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import anotherLikeIcon from '../Images/setLike.png';
 import axios from 'axios';
-const Post = (post) => {
+import { useSelector } from 'react-redux';
+
+const Post = ({ post }) => {
+   // console.log('post in post  (post.post)', post);
+   const userDetails = useSelector((state) => state.user);
+   let loggedInUser = userDetails.user;
+   let userId = loggedInUser?.user?._id;
+   const accessToken = loggedInUser?.accessToken;
+
+   const id = post?.user?._id || post?.user;
+   //console.log('Fetching user with ID:', id);
+
    const [user, setUser] = useState([]);
+
    useEffect(() => {
       const getUser = async () => {
          try {
             const res = await axios.get(
-               `http://localhost:5000/api/user/post/user/details/${post?.post.user}`,
+               `http://localhost:5000/api/user/post/user/details/${id}`,
             );
             setUser(res.data);
-            // console.log('res.data', res.data);
+            console.log('res.data', res.data);
          } catch (error) {
             console.log('Some error occurs :', error);
          }
@@ -24,25 +37,19 @@ const Post = (post) => {
       getUser();
    }, []);
 
-   const userId = '677edae3231634cad19bcebf';
-   const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
-
+   //  console.log('users in post', user); //empty array
    const [like, setLike] = useState([
-      post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
+      post?.post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
    ]);
-   const [count, setCount] = useState(post?.post?.like?.length);
-   const [Comments, setComments] = useState([]);
-   const [Commentwriting, setCommentwriting] = useState('');
-
+   const [count, setCount] = useState(post?.like?.length);
+   const [comments, setComments] = useState(post?.comments ?? []);
+   const [commentwriting, setCommentwriting] = useState('');
    const [show, setShow] = useState(false);
 
-   //console.log('Post : ', post);
-   //console.log('Post Title : ', post?.post.title);
-
+   // console.log('comments in post', comments?.length);
    const handleLike = async () => {
       if (like == LikeIcon) {
-         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+         await fetch(`http://localhost:5000/api/post/${post?._id}/like`, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
@@ -52,7 +59,7 @@ const Post = (post) => {
          setLike(anotherLikeIcon);
          setCount(count + 1);
       } else {
-         await fetch(`http://localhost:5000/api/post/${post._id}/like`, {
+         await fetch(`http://localhost:5000/api/post/${post?._id}/like`, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
@@ -65,22 +72,27 @@ const Post = (post) => {
       //console.log(count);
    };
 
-   const addComment = () => {
+   const addComment = async () => {
       //fake data
       const comment = {
-         id: 'gdsdsdsdsd33343dfdfdff',
-         username: 'Sumen',
-         title: `${Commentwriting}`,
+         postid: `${post?._id}`,
+         username: `${loggedInUser?.user?.username}`,
+         comment: `${commentwriting}`,
+         profile: `${loggedInUser?.user?.profile}`,
       };
-      //setComments(Comments.concat(comment));
-      setComments([...Comments, comment]);
-      /* setComments((prevComments) => {
-         return [...prevComments, comment];
-      }); */
+      await fetch('http://localhost:5000/api/post/comment/post', {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/Json',
+            token: accessToken,
+         },
+         body: JSON.stringify(comment),
+      });
+      setComments(comments.concat(comment));
    };
 
    const handleComment = () => {
-      if (Commentwriting.trim() === '') return; // Prevent empty comments
+      if (commentwriting.trim() === '') return; // Prevent empty comments
       addComment();
       setCommentwriting(''); // Clear the input field
    };
@@ -128,7 +140,7 @@ const Post = (post) => {
                            color: '#aaa',
                         }}
                      >
-                        following by Sumen
+                        following by....{/* {user?.username} */}
                      </p>
                   </div>
 
@@ -142,13 +154,9 @@ const Post = (post) => {
                      marginTop: '0px',
                   }}
                >
-                  {post?.post?.title}
+                  {post?.title}
                </p>
-               <img
-                  src={`${post?.post?.image}`}
-                  className="postImages"
-                  alt=""
-               />
+               <img src={`${post?.image}`} className="postImages" alt="" />
                <div style={{ display: 'flex' }}>
                   <div style={{ display: 'flex', marginLeft: '10px' }}>
                      <div
@@ -181,7 +189,7 @@ const Post = (post) => {
                            onClick={handleshow}
                         />
                         <p style={{ marginLeft: '5px' }}>
-                           {post?.post?.comments?.length} comments
+                           {comments?.length} comments
                         </p>
                      </div>
                   </div>
@@ -206,7 +214,7 @@ const Post = (post) => {
                   <div style={{ padding: '10px' }}>
                      <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img
-                           src={`${profileImage}`}
+                           src={`${loggedInUser?.user?.profile}`}
                            className="postImage"
                            alt="profile"
                         />
@@ -215,7 +223,7 @@ const Post = (post) => {
                            type="text"
                            placeholder="Write a comment..."
                            className="commentInput"
-                           value={Commentwriting}
+                           value={commentwriting}
                            onChange={(e) => setCommentwriting(e.target.value)}
                         />
                         <button
@@ -225,51 +233,59 @@ const Post = (post) => {
                            Post
                         </button>
                      </div>
-                     {Comments.map((comment) => (
-                        <div key={comment.id} style={{ alignItems: 'center' }}>
+
+                     {Array.isArray(comments) &&
+                        comments.map((comment) => (
                            <div
-                              style={{ display: 'flex', alignItems: 'center' }}
+                              key={comment?.id}
+                              style={{ alignItems: 'center' }}
                            >
-                              <img
-                                 src={`${profileImage}`}
-                                 className="postImage"
-                                 alt="profile"
-                              />
-                              <p
+                              <div
                                  style={{
-                                    marginLeft: '6px',
-                                    fontSize: 18,
-                                    marginTop: 6,
+                                    display: 'flex',
+                                    alignItems: 'center',
                                  }}
                               >
-                                 {comment.username}
+                                 <img
+                                    src={`${comment?.user?.profile}`}
+                                    className="postImage"
+                                    alt="profile"
+                                 />
+                                 <p
+                                    style={{
+                                       marginLeft: '6px',
+                                       fontSize: 18,
+                                       marginTop: 6,
+                                    }}
+                                 >
+                                    {comment?.username}
+                                 </p>
+                              </div>
+
+                              <p
+                                 style={{
+                                    marginLeft: '55px',
+                                    textAlign: 'start',
+                                    marginTop: -16,
+                                    fontSize: 20,
+                                 }}
+                              >
+                                 {comment?.comment}
+                              </p>
+
+                              <p
+                                 style={{
+                                    marginLeft: '55px',
+                                    textAlign: 'start',
+                                    marginTop: -10,
+                                    color: '#aaa',
+                                    fontSize: 11,
+                                 }}
+                              >
+                                 Reply
                               </p>
                            </div>
-
-                           <p
-                              style={{
-                                 marginLeft: '55px',
-                                 textAlign: 'start',
-                                 marginTop: -16,
-                                 fontSize: 20,
-                              }}
-                           >
-                              {comment.title}
-                           </p>
-
-                           <p
-                              style={{
-                                 marginLeft: '55px',
-                                 textAlign: 'start',
-                                 marginTop: -10,
-                                 color: '#aaa',
-                                 fontSize: 11,
-                              }}
-                           >
-                              Reply
-                           </p>
-                        </div>
-                     ))}
+                        ))}
                   </div>
                ) : (
                   ''
@@ -278,6 +294,9 @@ const Post = (post) => {
          </div>
       </div>
    );
+};
+Post.propTypes = {
+   post: PropTypes.object.isRequired,
 };
 
 export default Post;

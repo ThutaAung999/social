@@ -3,14 +3,44 @@ import image from '../Images/profile.jpeg';
 //import image3 from '../Images/image3.jpg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 const ProfileLeftbar = () => {
-   const [followingUser, setFollowingUser] = useState([]);
+   let location = useLocation();
+   let id = location.pathname.split('/')[2];
 
+   const userDetails = useSelector((state) => state.user);
+   const user = userDetails.user;
+   const accessToken = user?.accessToken;
+
+   const [follow, setUnFollow] = useState([
+      user?.user?.following.includes(id) ? 'UnFollow' : 'Follow',
+   ]);
+
+   const [users, setuser] = useState([]);
+   useEffect(() => {
+      const getuser = async () => {
+         try {
+            const res = await axios.get(
+               `http://localhost:5000/api/user/post` / user / details`/${id}`,
+            );
+            setuser(res.data);
+         } catch (error) {
+            console.log({ message: 'Some error occured', error: error });
+         }
+      };
+      getuser();
+   }, []);
+
+   const followersCounter = users?.followers?.length;
+   const followingCounter = users?.following?.length;
+
+   const [followingUser, setFollowingUser] = useState([]);
    useEffect(() => {
       const getFollowingUser = async () => {
          try {
             const res = await axios.get(
-               'http://localhost:5000/api/post/following/677edae3231634cad19bcebf',
+               `http://localhost:5000/api/post/following/${id}`,
             );
             setFollowingUser(res.data);
          } catch (error) {
@@ -20,10 +50,32 @@ const ProfileLeftbar = () => {
       getFollowingUser();
    }, []);
 
-   console.log('followingUser :', followingUser);
+   const handleFollow = async () => {
+      if (follow === 'Follow') {
+         console.log('follow :', follow);
+         await fetch(`http://localhost:5000/api/user/following/${id}`, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+               token: accessToken,
+            },
+            body: JSON.stringify({ user: `${user?.user?._id}` }),
+         });
+         setUnFollow('UnFollow');
+      } else {
+         await fetch(`http://localhost:5000/api/user/following/${id}`, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+               token: accessToken,
+            },
+            body: JSON.stringify({ user: `${user?.user?._id}` }),
+         });
+         setUnFollow('Follow');
+      }
+   };
 
-   const image =
-      'https://images.pexels.com/photos/13004916/pexels-photo-13004916.jpeg?auto=compress&cs=tinysrgb&w=600';
+   console.log('followingUser :', followingUser);
 
    return (
       <div className="ProfileLeftbar">
@@ -33,7 +85,11 @@ const ProfileLeftbar = () => {
             <div
                style={{ display: 'flex', alignItems: 'center', marginTop: -30 }}
             >
-               <img src={`${image}`} className="ProfilepageImage" alt="" />
+               <img
+                  src={`${users?.profile}`}
+                  className="ProfilepageImage"
+                  alt=""
+               />
                <div>
                   <p
                      style={{
@@ -43,7 +99,7 @@ const ProfileLeftbar = () => {
                         textAlign: 'start',
                      }}
                   >
-                     Aung Aung
+                     {users?.username}
                   </p>
                   <p
                      style={{
@@ -60,7 +116,7 @@ const ProfileLeftbar = () => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                <p style={{ color: 'black', marginLeft: 20, fontSize: 14 }}>
-                  Profile Views
+                  Followings
                </p>
                <p
                   style={{
@@ -70,7 +126,7 @@ const ProfileLeftbar = () => {
                      marginTop: 17,
                   }}
                >
-                  100K
+                  {followingCounter}
                </p>
             </div>
             {/*  <hr style={{ marginTop: -10 }} /> */}
@@ -92,7 +148,7 @@ const ProfileLeftbar = () => {
                      marginTop: 17,
                   }}
                >
-                  4321
+                  {followersCounter}
                </p>
             </div>
             {/*   <hr style={{ marginTop: -10 }} /> */}
@@ -128,17 +184,39 @@ const ProfileLeftbar = () => {
                   အခုမှစလေ့လာမည့်သူတစ်ယေ
                </p>
             </div>
-            <button
-               style={{
-                  width: '100%',
-                  paddintTop: 7,
-                  paddingBottom: 7,
-                  backgroundColor: 'green',
-                  color: 'white',
-               }}
-            >
-               Edit Bio
-            </button>
+            {/* our logged in user  is not the same as the user who is being followed */}
+            {/* user?.user?.id!==id က မတူရင်  Follow  လူပ်,  တူရင်  Edit Bio*/}
+            {user?.user?._id !== id ? (
+               <div onClick={handleFollow}>
+                  <button
+                     style={{
+                        width: '100%',
+                        paddintTop: 7,
+                        paddingBottom: 7,
+                        border: 'none',
+                        backgroundColor: 'green',
+                        color: 'white',
+                     }}
+                  >
+                     {follow}
+                  </button>
+               </div>
+            ) : (
+               <div>
+                  <button
+                     style={{
+                        width: '100%',
+                        paddingTop: 7,
+                        paddingBottom: 7,
+                        border: 'none',
+                        backgroundColor: 'green',
+                        color: 'white',
+                     }}
+                  >
+                     Edit Bio
+                  </button>
+               </div>
+            )}
          </div>
 
          {/* end of notifications */}
@@ -152,17 +230,19 @@ const ProfileLeftbar = () => {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 5 }}>
                {followingUser.map((item) => (
-                  <div
-                     key={item._id}
-                     style={{ marginLeft: 4, cursor: 'pointer' }}
-                  >
-                     <img
-                        src={`${item.profile}`}
-                        className="friendImage"
-                        alt=""
-                     />
-                     <p style={{ marginTop: -2 }}>{item.username}</p>
-                  </div>
+                  <Link to={`/Profile/${item._id}`} key={item._id}>
+                     <div
+                        style={{ marginLeft: 4, cursor: 'pointer' }}
+                        key={item._id}
+                     >
+                        <img
+                           src={`${item.profile}`}
+                           className="friendImage"
+                           alt=""
+                        />
+                        <p style={{ marginTop: -2 }}>{item.username}</p>
+                     </div>
+                  </Link>
                ))}
             </div>
          </div>

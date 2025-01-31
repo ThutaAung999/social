@@ -6,11 +6,13 @@ import image2 from '../Images/image2.jpg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Follow from './Follow';
+import { useSelector } from 'react-redux';
 
 const Rightbar = () => {
+   const userDetails = useSelector((state) => state.user);
+   let user = userDetails?.user;
+   const userId = user?.user?._id;
    const [users, setUsers] = useState([]);
-   const userId = '677edae3231634cad19bcebf';
-
    useEffect(() => {
       const getUser = async () => {
          try {
@@ -25,9 +27,6 @@ const Rightbar = () => {
       };
       getUser();
    }, []);
-
-   //console.log('users in rightbar :', users);
-   //users.map((user) => user.username).forEach((name) => console.log(name));
 
    return (
       <div className="rightbar">
@@ -88,9 +87,10 @@ const Rightbar = () => {
                Suggested for you
             </h3>
 
-            {users.map((user) => (
-               <Follow key={user.id} userDetails={user} />
-            ))}
+            {users.map((user) => {
+               // console.log('User in rightbar', user);
+               return <Follow key={user.id} userdetails={user} />;
+            })}
          </div>
       </div>
    );

@@ -2,36 +2,36 @@ import { useState } from 'react';
 import addFriends from '../Images/add-user.png';
 import UserToFollow from '../Images/afterFollowImg.png';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const Follow = ({ userDetails }) => {
-   const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
+const Follow = ({ userdetails }) => {
+   const userDetails = useSelector((state) => state.user);
+   const user = userDetails?.user;
+   const id = user?.user?._id;
+   const accessToken = user?.accessToken;
    const [follow, setFollow] = useState(addFriends);
+
    const handleFollow = async (e) => {
-      // e   is   id
-      // console.log(e);
-      const user = '677edae3231634cad19bcebf'; //aung aung'id
-      console.log('user:', user);
       await fetch(
-         `http://localhost:5000/api/user/following/${userDetails._id}`,
+         `http://localhost:5000/api/user/following/${userdetails?._id}`,
          {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
                token: accessToken,
             },
-            body: JSON.stringify({ user }),
+            body: JSON.stringify({ user: `${id}` }),
          },
       );
-
       setFollow(UserToFollow);
    };
    // console.log('userDetails in follow', userDetails);
    return (
       <div
-         key={userDetails._id}
+         key={userdetails?._id}
          style={{ marginTop: '-10px' }}
-         id={userDetails._id}
+         id={userdetails?._id}
       >
          <div
             style={{
@@ -40,29 +40,31 @@ const Follow = ({ userDetails }) => {
                justifyContent: 'space-between',
             }}
          >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-               <img
-                  src={`${userDetails.profile}`}
-                  className="profileImage"
-                  alt=""
-               />
-               <div>
-                  <p style={{ marginLeft: '10px', textAlign: 'start' }}>
-                     {userDetails.username}
-                  </p>
-                  <p
-                     style={{
-                        marginLeft: '10px',
-                        textAlign: 'start',
-                        marginTop: '-16px',
-                        fontSize: 11,
-                        color: '#aaa',
-                     }}
-                  >
-                     Suggested for you
-                  </p>
+            <Link to={`/Profile/${userdetails._id}`}>
+               <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img
+                     src={`${userdetails?.profile}`}
+                     className="profileImage"
+                     alt=""
+                  />
+                  <div>
+                     <p style={{ marginLeft: '10px', textAlign: 'start' }}>
+                        {userdetails?.username}
+                     </p>
+                     <p
+                        style={{
+                           marginLeft: '10px',
+                           textAlign: 'start',
+                           marginTop: '-16px',
+                           fontSize: 11,
+                           color: '#aaa',
+                        }}
+                     >
+                        Suggested for you
+                     </p>
+                  </div>
                </div>
-            </div>
+            </Link>
             <div
                style={{
                   backgroundColor: '#aaa',
@@ -71,7 +73,7 @@ const Follow = ({ userDetails }) => {
                   borderRadius: '50%',
                   cursor: 'pointer',
                }}
-               onClick={(e) => handleFollow(userDetails._id)}
+               onClick={(e) => handleFollow(userdetails?._id)}
             >
                <img className="addfriend" src={`${follow}`} alt="" />
             </div>
@@ -81,7 +83,7 @@ const Follow = ({ userDetails }) => {
 };
 //Thanks to Copilot for this code
 Follow.propTypes = {
-   userDetails: PropTypes.shape({
+   userdetails: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       profile: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,

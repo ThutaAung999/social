@@ -4,9 +4,11 @@ import CoverImage from '../Images/profile.jpeg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from '../ProfilePostContainer/Post';
+import { useLocation } from 'react-router-dom';
 
 const ProfileMainPost = () => {
-   const userId = '677edae3231634cad19bcebf';
+   let location = useLocation();
+   let userId = location.pathname.split('/')[2];
    const [post, setPost] = useState([]);
    useEffect(() => {
       const getPost = async () => {

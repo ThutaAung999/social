@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
 import './login.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { login } from '../../Components/ReduxContainer/apiCall';
 
-const login = () => {
+const Login = () => {
+   const dispatch = useDispatch();
+   const { isFetching, error } = useSelector((state) => state.user);
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+
+   const handleClick = (e) => {
+      e.preventDefault();
+      login(dispatch, { email, password });
+   };
    return (
       <div className="mainConatinerForSignup">
          <div className="subMainContainer">
@@ -16,13 +28,23 @@ const login = () => {
             </div>
             <div style={{ flex: 3 }}>
                <p className="createAccountText">Login account</p>
-               <input type="text" placeholder="Email" className="inputText" />
                <input
+                  id="email"
                   type="text"
-                  placeholder="Password"
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                   className="inputText"
                />
-               <button className="btnForSignup">Login</button>
+               <input
+                  id="password"
+                  type="text"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="inputText"
+               />
+               <button className="btnForSignup" onClick={handleClick}>
+                  Login
+               </button>
                <Link to={'/forgotPassword'}>
                   <p style={{ textAlign: 'start', marginLeft: '30.6%' }}>
                      Forgot Password?
@@ -38,4 +60,4 @@ const login = () => {
       </div>
    );
 };
-export default login;
+export default Login;

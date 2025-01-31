@@ -3,16 +3,20 @@ import ContentPost from '../ContentPostContainer/ContentPost';
 import Post from '../PostContainer/Post';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 const MainPost = () => {
-   const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2VkYWUzMjMxNjM0Y2FkMTliY2ViZiIsInVzZXJuYW1lIjoiYXVuZ2F1bmciLCJpYXQiOjE3MzcwOTYyOTV9.jUW6464Tyh5J9Pf3mKXnaPPnEK0D_sQNIKFxEnFvKlE';
+   const userDetails = useSelector((state) => state.user);
+   let user = userDetails.user;
+   let id = user?.user?._id;
+
+   const accessToken = user?.accessToken;
    const [post, setPost] = useState([]);
 
    useEffect(() => {
       const getPost = async () => {
          try {
             const response = await axios.get(
-               'http://localhost:5000/api/user/flw/677edae3231634cad19bcebf',
+               `http://localhost:5000/api/user/flw/${id}`,
                {
                   headers: {
                      token: accessToken,
@@ -26,14 +30,15 @@ const MainPost = () => {
       };
       getPost();
    }, []);
-   //console.log(post);
+   // console.log('post in Mainpost :', post);
 
    return (
       <div className="mainPostContainer">
          <ContentPost />
-         {post.map((item) => (
-            <Post key={item._id} post={item} />
-         ))}
+         {post.map((item) => {
+            // console.log('item in mainPost', item);
+            return <Post key={item._id} post={item} />;
+         })}
       </div>
    );
 };

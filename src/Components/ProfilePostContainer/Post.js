@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import anotherLikeIcon from '../Images/setLike.png';
 import axios from 'axios';
 const Post = (detail) => {
-  // console.log('detail in post', detail);
+   // console.log('detail in post', detail);
    // console.log(detail.detail.title);
    const [count, setCount] = useState(0);
    const [Comments, setComments] = useState([]);
@@ -19,12 +19,13 @@ const Post = (detail) => {
    const [user, setUser] = useState([]);
    useEffect(() => {
       const getUser = async () => {
-         try {// post ကိုတင်တဲ့  user's  details ကို ယူတာ
+         try {
+            // post ကိုတင်တဲ့  user's  details ကို ယူတာ
             const res = await axios.get(
                `http://localhost:5000/api/user/post/user/details/${detail?.detail.user}`,
             );
             setUser(res.data);
-           //  console.log('res.data', res.data);
+            //  console.log('res.data', res.data);
          } catch (error) {
             console.log('Some error occurs :', error);
          }
@@ -116,7 +117,7 @@ const Post = (detail) => {
                            color: '#aaa',
                         }}
                      >
-                        following by Sumen
+                        following by..... {/* {user?.username} */}
                      </p>
                   </div>
 
