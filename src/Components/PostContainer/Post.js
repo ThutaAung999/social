@@ -14,11 +14,11 @@ const Post = ({ post }) => {
    // console.log('post in post  (post.post)', post);
    const userDetails = useSelector((state) => state.user);
    let loggedInUser = userDetails.user;
+
    let userId = loggedInUser?.user?._id;
    const accessToken = loggedInUser?.accessToken;
 
    const id = post?.user?._id || post?.user;
-   //console.log('Fetching user with ID:', id);
 
    const [user, setUser] = useState([]);
 
@@ -29,7 +29,6 @@ const Post = ({ post }) => {
                `http://localhost:5000/api/user/post/user/details/${id}`,
             );
             setUser(res.data);
-            console.log('res.data', res.data);
          } catch (error) {
             console.log('Some error occurs :', error);
          }
@@ -37,7 +36,6 @@ const Post = ({ post }) => {
       getUser();
    }, []);
 
-   //  console.log('users in post', user); //empty array
    const [like, setLike] = useState([
       post?.post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
    ]);
@@ -46,7 +44,6 @@ const Post = ({ post }) => {
    const [commentwriting, setCommentwriting] = useState('');
    const [show, setShow] = useState(false);
 
-   // console.log('comments in post', comments?.length);
    const handleLike = async () => {
       if (like == LikeIcon) {
          await fetch(`http://localhost:5000/api/post/${post?._id}/like`, {
@@ -73,7 +70,6 @@ const Post = ({ post }) => {
    };
 
    const addComment = async () => {
-      //fake data
       const comment = {
          postid: `${post?._id}`,
          username: `${loggedInUser?.user?.username}`,
@@ -194,6 +190,7 @@ const Post = ({ post }) => {
                      </div>
                   </div>
                   <div
+                     key={comments?._id}
                      style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -218,7 +215,6 @@ const Post = ({ post }) => {
                            className="postImage"
                            alt="profile"
                         />
-                        {/*  <p style={{ marginLeft: '6px' }}>Sumen</p> */}
                         <input
                            type="text"
                            placeholder="Write a comment..."
@@ -237,7 +233,7 @@ const Post = ({ post }) => {
                      {Array.isArray(comments) &&
                         comments.map((comment) => (
                            <div
-                              key={comment?.id}
+                              key={comment?._id}
                               style={{ alignItems: 'center' }}
                            >
                               <div
@@ -247,7 +243,7 @@ const Post = ({ post }) => {
                                  }}
                               >
                                  <img
-                                    src={`${comment?.user?.profile}`}
+                                    src={`${comment?.profile}`}
                                     className="postImage"
                                     alt="profile"
                                  />
