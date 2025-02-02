@@ -15,9 +15,12 @@ const Post = ({ post }) => {
    const userDetails = useSelector((state) => state.user);
    let loggedInUser = userDetails.user;
 
+   //loggedInUser ရဲ့ id ကိုပဲထုတ်ယူတာ,
+   // post ကို like လုပ်ပြီးသားလား မလုပ်သေးဘူးလားဆုံးဖြတ်ဖို့သုံး
    let userId = loggedInUser?.user?._id;
    const accessToken = loggedInUser?.accessToken;
 
+   //postတင်တဲ့userရဲ့ id,username,profile,like,followers,followings..စတဲ့ အသေးစိတ်တွေကိုယူပြီး render လုပ်ဖို့သုံး
    const id = post?.user?._id || post?.user;
 
    const [user, setUser] = useState([]);
@@ -37,7 +40,7 @@ const Post = ({ post }) => {
    }, []);
 
    const [like, setLike] = useState([
-      post?.post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
+      post?.like?.includes(userId) ? anotherLikeIcon : LikeIcon,
    ]);
    const [count, setCount] = useState(post?.like?.length);
    const [comments, setComments] = useState(post?.comments ?? []);

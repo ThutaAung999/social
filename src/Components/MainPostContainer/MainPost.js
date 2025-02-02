@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const MainPost = () => {
    const userDetails = useSelector((state) => state.user);
    let user = userDetails.user;
-   let id = user?.user?._id;
+   let id = user?.user?._id; //
 
    const accessToken = user?.accessToken;
    const [post, setPost] = useState([]);

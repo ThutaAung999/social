@@ -200,14 +200,6 @@ const Leftbar = () => {
                      alt=""
                   />
                ))}
-               {/* <img src={`${image}`} className="explorerImage" alt="" />
-               <img src={`${image1}`} className="explorerImage" alt="" />
-               <img src={`${image2}`} className="explorerImage" alt="" />
-               <img src={`${image3}`} className="explorerImage" alt="" />
-               <img src={`${image4}`} className="explorerImage" alt="" />
-               <img src={`${image5}`} className="explorerImage" alt="" />
-               <img src={`${image6}`} className="explorerImage" alt="" />
-               <img src={`${image}`} className="explorerImage" alt="" /> */}
             </div>
          </div>
       </div>

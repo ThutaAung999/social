@@ -23,6 +23,9 @@ const ProfileMainPost = () => {
       };
       getPost();
    }, []);
+
+   // console.log('post in ProfileMainPost :', post);
+
    return (
       <div className="profileMainPostContainer">
          <div>

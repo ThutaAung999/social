@@ -52,7 +52,7 @@ const ProfileLeftbar = () => {
 
    const handleFollow = async () => {
       if (follow === 'Follow') {
-         console.log('follow :', follow);
+         //  console.log('follow :', follow);
          await fetch(`http://localhost:5000/api/user/following/${id}`, {
             method: 'PUT',
             headers: {
@@ -75,7 +75,7 @@ const ProfileLeftbar = () => {
       }
    };
 
-   console.log('followingUser :', followingUser);
+   // console.log('followingUser :', followingUser);
 
    return (
       <div className="ProfileLeftbar">

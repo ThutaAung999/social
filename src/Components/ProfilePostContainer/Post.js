@@ -7,12 +7,22 @@ import MoreOption from '../Images/more.png';
 import { useEffect, useState } from 'react';
 import anotherLikeIcon from '../Images/setLike.png';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Post = (detail) => {
-   // console.log('detail in post', detail);
-   // console.log(detail.detail.title);
+   let location = useLocation();
+   let userId = location.pathname.split('/')[2];
+
+   const userDetails = useSelector((state) => state.user);
+   let loggedInUser = userDetails.user;
+
+   //   let userId = loggedInUser?.user?._id;
+   const accessToken = loggedInUser?.accessToken;
+
+   console.log('detail in post', detail);
    const [count, setCount] = useState(0);
-   const [Comments, setComments] = useState([]);
-   const [Commentwriting, setCommentwriting] = useState('');
+   const [comments, setComments] = useState(detail?.detail?.comments ?? []);
+   const [commentwriting, setCommentwriting] = useState('');
 
    const [show, setShow] = useState(false);
 
@@ -25,7 +35,6 @@ const Post = (detail) => {
                `http://localhost:5000/api/user/post/user/details/${detail?.detail.user}`,
             );
             setUser(res.data);
-            //  console.log('res.data', res.data);
          } catch (error) {
             console.log('Some error occurs :', error);
          }
@@ -33,7 +42,7 @@ const Post = (detail) => {
       getUser();
    }, []);
 
-   //console.log('user in post', user);
+   console.log('user details in post', user);
    //console.log('Post : ', post);
    //console.log('Post Title : ', post?.post.title);
 
@@ -62,22 +71,27 @@ const Post = (detail) => {
       //console.log(count);
    };
 
-   const addComment = () => {
-      //fake data
+   const addComment = async () => {
       const comment = {
-         id: 'gdsdsdsdsd33343dfdfdff',
-         username: 'Sumen',
-         title: `${Commentwriting}`,
+         postid: `${detail?.detail?._id}`,
+         username: `${user?.username}`,
+         comment: `${commentwriting}`,
+         profile: `${user?.profile}`,
       };
-      //setComments(Comments.concat(comment));
-      setComments([...Comments, comment]);
-      /* setComments((prevComments) => {
-         return [...prevComments, comment];
-      }); */
+      await fetch('http://localhost:5000/api/post/comment/post', {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/Json',
+            token: accessToken,
+         },
+         body: JSON.stringify(comment),
+      });
+      setComments(comments.concat(comment));
+      //setComments([...comments, comment]); //အပေါ််က ကုဒ်နဲ့ အတူတူပဲ
    };
 
    const handleComment = () => {
-      if (Commentwriting.trim() === '') return; // Prevent empty comments
+      if (commentwriting.trim() === '') return; // Prevent empty comments
       addComment();
       setCommentwriting(''); // Clear the input field
    };
@@ -92,6 +106,7 @@ const Post = (detail) => {
       }
    };
 
+   console.log('comments in post', comments);
    //console.log('user :', user);
    return (
       <div className="postContainer">
@@ -172,7 +187,7 @@ const Post = (detail) => {
                            onClick={handleshow}
                         />
                         <p style={{ marginLeft: '5px' }}>
-                           {detail?.detail?.comments?.length} comments
+                           {comments?.length} comments
                         </p>
                      </div>
                   </div>
@@ -201,12 +216,12 @@ const Post = (detail) => {
                            className="postImage"
                            alt="profile"
                         />
-                        {/*  <p style={{ marginLeft: '6px' }}>Sumen</p> */}
+
                         <input
                            type="text"
                            placeholder="Write a comment..."
                            className="commentInput"
-                           value={Commentwriting}
+                           value={commentwriting}
                            onChange={(e) => setCommentwriting(e.target.value)}
                         />
                         <button
@@ -216,51 +231,59 @@ const Post = (detail) => {
                            Post
                         </button>
                      </div>
-                     {Comments.map((comment) => (
-                        <div key={comment.id} style={{ alignItems: 'center' }}>
+
+                     {Array.isArray(comments) &&
+                        comments.map((comment) => (
                            <div
-                              style={{ display: 'flex', alignItems: 'center' }}
+                              key={comment?._id}
+                              style={{ alignItems: 'center' }}
                            >
-                              <img
-                                 src={`${profileImage}`}
-                                 className="postImage"
-                                 alt="profile"
-                              />
-                              <p
+                              <div
                                  style={{
-                                    marginLeft: '6px',
-                                    fontSize: 18,
-                                    marginTop: 6,
+                                    display: 'flex',
+                                    alignItems: 'center',
                                  }}
                               >
-                                 {comment.username}
+                                 <img
+                                    src={`${comment?.profile}`}
+                                    className="postImage"
+                                    alt="profile"
+                                 />
+                                 <p
+                                    style={{
+                                       marginLeft: '6px',
+                                       fontSize: 18,
+                                       marginTop: 6,
+                                    }}
+                                 >
+                                    {comment?.username}
+                                 </p>
+                              </div>
+
+                              <p
+                                 style={{
+                                    marginLeft: '55px',
+                                    textAlign: 'start',
+                                    marginTop: -16,
+                                    fontSize: 20,
+                                 }}
+                              >
+                                 {comment?.comment}
+                              </p>
+
+                              <p
+                                 style={{
+                                    marginLeft: '55px',
+                                    textAlign: 'start',
+                                    marginTop: -10,
+                                    color: '#aaa',
+                                    fontSize: 11,
+                                 }}
+                              >
+                                 Reply
                               </p>
                            </div>
-
-                           <p
-                              style={{
-                                 marginLeft: '55px',
-                                 textAlign: 'start',
-                                 marginTop: -16,
-                                 fontSize: 20,
-                              }}
-                           >
-                              {comment.title}
-                           </p>
-
-                           <p
-                              style={{
-                                 marginLeft: '55px',
-                                 textAlign: 'start',
-                                 marginTop: -10,
-                                 color: '#aaa',
-                                 fontSize: 11,
-                              }}
-                           >
-                              Reply
-                           </p>
-                        </div>
-                     ))}
+                        ))}
                   </div>
                ) : (
                   ''
