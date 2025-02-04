@@ -19,7 +19,7 @@ const ContentPost = () => {
    let id = user?.user?._id;
    // console.log('id in mainPost:', id);
 
-   const accessToken = user.accessToken;
+   const accessToken = user?.accessToken;
 
    const profileImage = user?.user?.profile;
    const [file, setFile] = useState(null);
@@ -27,9 +27,6 @@ const ContentPost = () => {
    const [title, setTile] = useState('');
    const [imagePre, setImagePre] = useState(null);
    const [VideoPre, setVideoPre] = useState(null);
-
-   console.log('file?.name :', file?.name);
-   console.log('file2?.name :', file2?.name);
 
    const handlePost = (e) => {
       e.preventDefault(); // brower refresh  ကို ဖယ်ဖို့  အဓိကသုံး
@@ -118,7 +115,7 @@ const ContentPost = () => {
                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                   //console.log('Video available at', downloadURL);
-                  fetch(`http://localhost:5000/api/post/user/post`, {
+                  fetch('http://localhost:5000/api/post/user/post', {
                      method: 'POST',
                      headers: {
                         'Content-Type': 'application/JSON',
@@ -137,7 +134,7 @@ const ContentPost = () => {
             },
          );
       } else {
-         fetch(`http://localhost:5000/api/post/user/post`, {
+         fetch('http://localhost:5000/api/post/user/post', {
             method: 'POST',
             headers: { 'Content-Type': 'application/JSON', token: accessToken },
             body: JSON.stringify({ title: title, video: '', image: '' }),
@@ -147,88 +144,107 @@ const ContentPost = () => {
          });
       }
    };
+
+   console.log('file?.name :', file?.name);
+   console.log('file2?.name :', file2?.name);
+
    return (
       <div>
          <div className="ContentUploadContainer">
-            <div
-               style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '10px',
-               }}
-            >
-               <img
-                  src={`${profileImage}`}
-                  className="profileImage"
-                  alt="profile"
-               />
+            <div style={{ display: 'flex', alignItems: 'center', padding: 10 }}>
+               <img src={`${profileImage}`} className="profileimage" alt="" />
                <input
                   type="text"
                   className="contentWritingpart"
-                  placeholder="Write your real thougt......."
+                  placeholder="Write your real thought....."
                   onChange={(e) => setTile(e.target.value)}
                />
             </div>
-
-            <div
-               style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-               }}
-            >
+            <div style={{ marginLeft: '10px' }}>
+               {imagePre !== null ? (
+                  <img
+                     src={imagePre}
+                     style={{
+                        width: '410px',
+                        height: '420px',
+                        objectFit: 'cover',
+                        borderRadius: '10px',
+                     }}
+                     alt=""
+                  />
+               ) : VideoPre !== null ? (
+                  <video
+                     className="PostImages"
+                     width="500"
+                     height="500"
+                     controls
+                  >
+                     <source src={VideoPre} type="video/mp4" />
+                  </video>
+               ) : (
+                  ''
+               )}
                <div
-                  style={{
-                     display: 'flex',
-                     marginLeft: '5px',
-                     alignItems: 'center',
-                     gap: '10px',
-                  }}
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
                >
-                  <label htmlFor="file">
-                     <img src={`${imageIcon}`} className="icon" alt="" />
-                     <input
-                        type="file"
-                        id="file"
-                        style={{ display: 'none' }}
-                        onChange={(e) => [
-                           //we need only one image
-                           setFile(e.target.files[0]),
-                           // setImagePre(URL.createObjectURL(e.target.files[0])),
-                        ]}
-                     />
-                  </label>
-                  <img src={`${emojiIcon}`} className="icon" alt="" />
-                  <label htmlFor="file2">
-                     <img src={`${videoIcon}`} className="icon" alt="" />
-                     <input
-                        type="file"
-                        id="file2"
-                        style={{ display: 'none' }}
-                        onChange={(e) => [
-                           //we need only one video
-                           setFile2(e.target.files[0]),
-                        ]}
-                     />
-                  </label>
+                  <div>
+                     <label htmlFor="file">
+                        <img src={`${imageIcon}`} className="icons" alt="" />
+                        <input
+                           type="file"
+                           name="file"
+                           id="file"
+                           style={{ display: 'none' }}
+                           onChange={(e) => {
+                              const selectedFile = e.target.files[0];
+                              if (selectedFile) {
+                                 setFile(selectedFile);
+                                 setImagePre(URL.createObjectURL(selectedFile));
+                              }
+                           }}
+                        />
+                     </label>
+                     <img src={`${emojiIcon}`} className="icons" alt="" />
+                     <label htmlFor="file2">
+                        <img src={`${videoIcon}`} className="icons" alt="" />
+                        <input
+                           type="file"
+                           name="file2"
+                           id="file2"
+                           style={{ display: 'none' }}
+                           onChange={(e) => {
+                              const selectedFile = e.target.files[0];
+                              if (selectedFile) {
+                                 setFile2(selectedFile);
+                                 setVideoPre(URL.createObjectURL(selectedFile));
+                              }
+                           }}
+                        />
+                     </label>
+                  </div>
+                  <button
+                     style={{
+                        height: '30px',
+                        marginRight: '12px',
+                        marginTop: '40px',
+                        paddingLeft: '20px',
+                        paddingRight: '20px',
+                        paddingTop: 6,
+                        paddingBottom: 6,
+                        border: 'none',
+                        backgroundColor: 'black',
+                        color: 'white',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                     }}
+                     onClick={handlePost}
+                  >
+                     Post
+                  </button>
                </div>
-               <button
-                  className="postButton"
-                  style={{
-                     backgroundColor: 'black',
-                     color: 'white',
-                     border: 'none',
-                     borderRadius: '5px',
-                     cursour: 'pointer',
-                  }}
-                  onClick={handlePost}
-               >
-                  Post
-               </button>
             </div>
          </div>
       </div>
    );
 };
-
 export default ContentPost;

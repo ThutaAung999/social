@@ -149,13 +149,27 @@ const Post = ({ post }) => {
                   style={{
                      textAlign: 'start',
                      width: '96%',
-                     marginLeft: '10px',
+                     marginLeft: '20px',
                      marginTop: '0px',
                   }}
                >
                   {post?.title}
                </p>
-               <img src={`${post?.image}`} className="postImages" alt="" />
+               {post?.image !== '' ? (
+                  <img src={`${post?.image}`} className="postImages" alt="" />
+               ) : post?.video !== '' ? (
+                  <video
+                     className="PostImages"
+                     width="500"
+                     height="500"
+                     controls
+                  >
+                     <source src={`${post.video}`} type="video/mp4" />
+                  </video>
+               ) : (
+                  ''
+               )}
+
                <div style={{ display: 'flex' }}>
                   <div style={{ display: 'flex', marginLeft: '10px' }}>
                      <div

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 const Leftbar = () => {
    const userDetails = useSelector((state) => state.user);
    const user = userDetails.user;
+   console.log('user in Leftbar:', user);
    const id = user?.user?._id;
    const accessToken = user?.accessToken;
 
