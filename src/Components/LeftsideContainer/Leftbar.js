@@ -193,14 +193,18 @@ const Leftbar = () => {
             </div>
 
             <div>
-               {post.map((item) => (
-                  <img
-                     key={item._id}
-                     src={`${item.image}`}
-                     className="explorerImage"
-                     alt=""
-                  />
-               ))}
+               {post.map((item) => [
+                  item.image === '' ? (
+                     ''
+                  ) : (
+                     <img
+                        key={item._id}
+                        src={`${item.image}`}
+                        className="explorerImage"
+                        alt=""
+                     />
+                  ),
+               ])}
             </div>
          </div>
       </div>

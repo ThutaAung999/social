@@ -6,29 +6,67 @@ import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 
 import { useSelector } from 'react-redux';
+import { VerifyEmail } from './Pages/VerifyEmail/VerifyEmail';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
 
-function App() {
+const App = () => {
    const userDetails = useSelector((state) => state.user);
    const user = userDetails.user;
-   // console.log('user :', user);
+   // console.log('user  in App.js:', user);
+
    return (
       <div className="App">
          <BrowserRouter>
             <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/Profile/:id" element={<Profile />} />
+               {/*  <Route path="/" element={<Home />} /> */}
                <Route
+                  path="/"
+                  element={
+                     user?.user?.verifed === true ? (
+                        <Home />
+                     ) : (
+                        <Navigate to={'/login'} replace={true} />
+                     )
+                  }
+               />
+
+               <Route path="/Profile/:id" element={<Profile />} />
+               {/* <Route path="/login" element={<Login />} /> */}
+               {/*  <Route
                   path="/login"
                   element={user !== null ? <Navigate to={'/'} /> : <Login />}
-               />
+               /> */}
                <Route
-                  path="/signup"
-                  element={user !== null ? <Navigate to={'/'} /> : <Register />}
+                  path="/login"
+                  element={
+                     user?.user?.verifed === true ? (
+                        <Navigate to={'/'} replace={true} />
+                     ) : (
+                        <Login />
+                     )
+                  }
+               ></Route>
+
+               <Route path="/signup" element={<Register />}></Route>
+               <Route
+                  path="/verify/email"
+                  element={
+                     user?.Status === 'Pending' ? (
+                        <VerifyEmail />
+                     ) : user?.user?.verifed === true ? (
+                        <Navigate to={'/'} replace={true} />
+                     ) : (
+                        <Login />
+                     )
+                  }
                />
+               <Route path="/forgot/password" element={<ForgotPassword />} />
+               <Route path="/reset/password" element={<ResetPassword />} />
             </Routes>
          </BrowserRouter>
       </div>
    );
-}
+};
 
 export default App;
